@@ -1,4 +1,5 @@
-const example = [
+
+const random = [
     {
       vegetarian: true,
       vegan: true,
@@ -1707,6 +1708,30 @@ const example = [
     },
   ];
 
+const ctx = document.getElementById('myChart');
+
+new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: ['Fat', 'Carb', 'Prot', 'Fib'],
+    datasets: [{
+      label: 'gr',
+      data: [12, 19, 3, 5],
+      borderWidth: 1
+    }]
+  },
+  options: {
+    legend: {
+        display: true
+    },
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  }
+});
+
 // VARIABLES GLOBALES
 const recipeMain = document.getElementById("recipe");
 
@@ -1792,13 +1817,50 @@ function printList(example) {
 }
 
 if (recipeMain) {
-  printList(example)
+  printList(random)
 }
 
-function printRecipe(i) {
+function printRecipe(random, i) {
   const detailSection = document.createElement("section");
   detailSection.id = 'detail';
   recipeSection.innerHTML = `
+    <h2>Simple lentil soup</h2>
+    <article class="image">
+        <img src="https://spoonacular.com/recipeImages/660109-556x370.jpg" alt="">
+    </article>
+    <article class="ingredients">
+        <div>
+            <ul id="ig-quantity">
+                <li><p id="space"></p></li>
+                <li>1</li>
+                <li>1</li>
+                <li>0.5 cups</li>
+                <li>3 Tbsps</li>
+                <li>1</li>
+                <li>3 servings</li>
+                <li>3 servings</li>
+                <li>1.5 tbsp</li>
+                <li>4.0 cups</li>
+            </ul>
+            <ul id="ig-name">
+                <li><p>Ingredients</p></li>
+                <li>bay leaf</li>
+                <li>garlic</li>
+                <li>lentils</li>
+                <li>olive oil</li>
+                <li>onion</li>
+                <li>salt & pepper</li>
+                <li>tomato</li>
+                <li>vinegar</li>
+                <li>water</li>
+            </ul>
+        </div>
+    </article>
+    <article id="graph-art">
+        <div>
+            <canvas id="myChart"></canvas>
+        </div>
+    </article>
     `
 }
 

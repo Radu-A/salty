@@ -3,11 +3,14 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Comfortaa';
     height: 100vh;
+    font-family: 'Comfortaa';
+    color: rgb(70, 70, 70);
 }
-
-/* Lista */
+article {
+    margin: 0;
+    padding: 0;
+}
 main {
     height: 100%;
     max-width: 600px;
@@ -25,6 +28,14 @@ h1 {
     font-size: 64px;
     text-align: center;
 }
+h2 {
+    margin: 0;
+    padding: 0;
+    font-size: 48px;
+    text-align: center;
+}
+
+/* LISTA */
 .suggestion {
     display: flex;
     justify-content: space-around;
@@ -39,10 +50,68 @@ h1 {
     justify-content: center;
     align-items: center;
 }
-.suggestion .image {
-    
-}
 .image img {
     width: 100%;
     border-radius: 3px;
+}
+
+/* DETALLE */
+#detail {
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: space-around;
+}
+#detail article {
+    flex-grow: 1;
+    flex-shrink: 1;
+    max-width: 400px;
+}
+.image {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.image img {
+    width: 75%;
+}
+.ingredients {
+    width: 85%;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+.ingredients h4 {
+    text-align: right;
+}
+.ingredients div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+ul {
+    margin: 0;
+    list-style: none;
+}
+#ig-quantity {
+    text-align: right;
+}
+.ingredients p {
+    margin-top: 0;
+    padding-top: 0;
+}
+#space {
+    height: 1.1rem;
+}
+#graph-art {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#graph-art div {
+    width: 250px;
 }

@@ -1,5 +1,5 @@
 
-const random = [
+const data = [
     {
       vegetarian: true,
       vegan: true,
@@ -1708,32 +1708,10 @@ const random = [
     },
   ];
 
-const ctx = document.getElementById('myChart');
-
-new Chart(ctx, {
-  type: 'bar',
-  data: {
-    labels: ['Fat', 'Carb', 'Prot', 'Fib'],
-    datasets: [{
-      label: 'gr',
-      data: [12, 19, 3, 5],
-      borderWidth: 1
-    }]
-  },
-  options: {
-    legend: {
-        display: true
-    },
-    scales: {
-      y: {
-        beginAtZero: true
-      }
-    }
-  }
-});
-
 // VARIABLES GLOBALES
 const recipeMain = document.getElementById("recipe");
+const sectionSpa = document.createElement("section");
+
 
 // VARIABLES CON LOS ENDPOINTS
 // Veganas
@@ -1747,86 +1725,86 @@ const options = {
   },
 };
 
+
+
+// FUNCIONES
+// Conexión API
 async function getRecipes() {
   try {
     const response = await fetch(url, options);
-    const result = await response.text();
-    console.log(result);
+    const {recipes} = await response.json();
+    return recipes;
+    console.log(randomRecipes);
   } catch (error) {
     console.error(`ERROR: ${error.stack}`);
   }
 }
-
-function printList(example) {
-    const listSection = document.createElement("section");
-    listSection.innerHTML = `
-    <section>   
-        <h1>Vegan</h1>
-        <article class="suggestion" id="suggestion-1">
-            <div class="text">
-                <p>${example[0].title}</p>
-                <p>${example[0].readyInMinutes} min</p>
-                <p>${example[0].servings} servings</p>
-            </div>
-            <div class="image">
-                <a href="#/first">
-                    <img src=${example[0].image} alt="">
-                </a>
-            </div>
-        </article>
-        <article class="suggestion" id="suggestion-2">
-        <div class="text">
-            <p>${example[1].title}</p>
-            <p>${example[1].readyInMinutes} min</p>
-            <p>${example[1].servings} servings</p>
-        </div>
-            <div class="image">
-                <a href="#/second">
-                    <img src=${example[1].image} alt="">
-                </a>
-            </div>
-        </article>
-        <article class="suggestion" id="suggestion-3">
-        <div class="text">
-            <p>${example[2].title}</p>
-            <p>${example[2].readyInMinutes} min</p>
-            <p>${example[2].servings} servings</p>
-        </div>
-            <div class="image">
-                <a href="#/third">
-                    <img src=${example[2].image} alt="">
-                </a>
-            </div>
-        </article>
-        <article class="suggestion" id="suggestion-4">
-        <div class="text">
-            <p>${example[3].title}</p>
-            <p>${example[3].readyInMinutes} min</p>
-            <p>${example[3].servings} servings</p>
-        </div>
-            <div class="image">
-                <a href="#/fourth">
-                    <img src=${example[3].image} alt="">
-                </a>
-            </div>
-        </article>
-    </section>`;
-    recipeMain.appendChild(listSection);
-    console.log(listSection);
-    console.log(recipeMain);
+// Pintar lista
+function printList(array) {
+  sectionSpa.innerHTML = `
+  <section>   
+      <h1>Vegan</h1>
+      <article class="suggestion" id="suggestion-1">
+          <div class="text">
+              <p>${array[0].title}</p>
+              <p>${array[0].readyInMinutes} min</p>
+              <p>${array[0].servings} servings</p>
+          </div>
+          <div class="image">
+              <a href="#/first">
+                  <img src=${array[0].image} alt="">
+              </a>
+          </div>
+      </article>
+      <article class="suggestion" id="suggestion-2">
+      <div class="text">
+          <p>${array[1].title}</p>
+          <p>${array[1].readyInMinutes} min</p>
+          <p>${array[1].servings} servings</p>
+      </div>
+          <div class="image">
+              <a href="#/second">
+                  <img src=${array[1].image} alt="">
+              </a>
+          </div>
+      </article>
+      <article class="suggestion" id="suggestion-3">
+      <div class="text">
+          <p>${array[2].title}</p>
+          <p>${array[2].readyInMinutes} min</p>
+          <p>${array[2].servings} servings</p>
+      </div>
+      <div class="image">
+          <a href="#/third">
+              <img src=${array[2].image} alt="">
+          </a>
+      </div>
+      </article>
+      <article class="suggestion" id="suggestion-4">
+      <div class="text">
+          <p>${array[3].title}</p>
+          <p>${array[3].readyInMinutes} min</p>
+          <p>${array[3].servings} servings</p>
+      </div>
+      <div class="image">
+          <a href="#/fourth">
+              <img src=${array[3].image} alt="">
+          </a>
+      </div>
+      </article>
+  </section>`;
+  recipeMain.appendChild(sectionSpa);
+  console.log(sectionSpa);
+  console.log(recipeMain);
 }
-
-if (recipeMain) {
-  printList(random)
-}
-
-function printRecipe(random, i) {
-  const detailSection = document.createElement("section");
-  detailSection.id = 'detail';
-  recipeSection.innerHTML = `
-    <h2>Simple lentil soup</h2>
+// Pintar detalle
+async function printDetail(array, i) {
+  console.log('hola');
+  sectionSpa.id = 'detail';
+  sectionSpa.innerHTML = `
+    <h2>${array[i].title}</h2>
     <article class="image">
-        <img src="https://spoonacular.com/recipeImages/660109-556x370.jpg" alt="">
+        <img src="${array[i].image}" alt="">
     </article>
     <article class="ingredients">
         <div>
@@ -1861,14 +1839,63 @@ function printRecipe(random, i) {
             <canvas id="myChart"></canvas>
         </div>
     </article>
-    `
+    `;
+  await recipeMain.appendChild(sectionSpa);
+  const ctx = document.getElementById('myChart');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Fat', 'Carb', 'Prot', 'Fib'],
+      datasets: [{
+        label: 'gr',
+        data: [12, 19, 3, 5],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      legend: {
+          display: true
+      },
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
 }
 
-window.addEventListener("hashchange", function() {
-  let hash = this.window.hash;
-  switch (hash) {
-    case '#/first' :
-
+// NAVEGACIÓN
+// Pantalla inicial - Lista 4 recetas
+// let randomRecipes = getRecipes();
+// randomRecipes.then((data) => {
+  if (recipeMain) {
+    printList(data)
   }
-})
-
+// })
+// Pantalla detalle receta 
+window.addEventListener("hashchange", function() {
+  let hash = window.location.hash;
+  sectionSpa.innerHTML = '';
+  // detailSection.innerHTML = '';
+  // randomRecipes.then((data) => {
+    switch (hash) {
+      case '#/first' :
+        console.log('uno')
+        printDetail(data, 0);
+        break;
+      case '#/second' :
+        printDetail(data, 1);
+        console.log('dos');
+        break;
+      case '#/third' :
+        printDetail(data, 2);
+        console.log('tres');
+        break;
+      case '#/fourth' :
+        printDetail(data, 3);
+        console.log('cuatro');
+        break;
+    }
+  })
+// })

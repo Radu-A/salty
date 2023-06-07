@@ -4,14 +4,12 @@
 body {
     margin: 0;
     padding: 0;
-    height: 100vh;
     font-family: 'Comfortaa';
     color: rgb(70, 70, 70);
     display: flex;
     justify-content: center;
 }
 main {
-    height: 100%;
     max-width: 600px;
 }
 article {
@@ -39,16 +37,18 @@ h2 {
 }
 
 /* LISTA */
+#list-section {
+    height: 100vh;
+}
 .suggestion {
-    min-height: 120px;
+    min-height: 140px;
     display: flex;
     justify-content: space-around;
-    box-shadow: 10px 0px 10px 0px #b5b5b5;
+    box-shadow: 1px 1px 20px 0px #b5b5b5;
 }
 .suggestion .text {
     min-width: 200px;
     text-align: right;
-    margin-bottom: 0.5rem;
 }
 .text h4 {
     margin: 0.6rem;
@@ -59,6 +59,9 @@ h2 {
 }
 .suggestion .image {
     width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-left: 1px solid #d3d3d3;
 }
 .image a {
@@ -72,21 +75,22 @@ h2 {
 }
 
 /* DETALLE */
-#detail {
+#detail-section {
     padding-top: 2.5rem;
-    padding-bottom: 2.5rem;
     align-items: center;
 }
-#detail article {
+#detail-section article {
     flex-grow: 1;
     flex-shrink: 1;
     max-width: 400px;
 }
-.image {
+#detail-section .image {
+    margin-top: 1rem;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    border-bottom: 1px solid #b8b8b8;
 }
 .image img {
     width: 75%;
@@ -112,13 +116,11 @@ li {
 #ig-quantity {
     text-align: right;
 }
-#ig-name {
-    width: 40%;;
-}
 #space {
     height: 1.1rem;
 }
 #graph-art {
+    height: auto;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -126,4 +128,36 @@ li {
 }
 #graph-art div {
     width: 250px;
+}
+
+/* STEPS */
+#steps-section {
+    justify-content: flex-start;
+    align-items: center;
+} 
+.step-article {
+    display: flex;
+    width: 90%;
+}
+.step-article h3 {
+    margin-top: 1rem;
+    width: 10%;
+}
+.step-article p {
+    width: 85%;
+}
+#article-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#article-btn button {
+    width: 10rem;
+    height: 3rem;
+    border: 2px solid #b8b8b8;
+    border-radius: 2px;
+    font-family: inherit;
+    font-size: 1.2rem;
+    color: inherit;
+    background-color: white;
 }

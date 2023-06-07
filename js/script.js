@@ -1709,14 +1709,21 @@ const data = [
   ];
 
 // VARIABLES GLOBALES
-const veganMain = document.getElementById("vegan");
+const recipesMain = document.querySelector(".recipes");
 const sectionSpa = document.createElement("section");
-
+const stepsSection = document.createElement("section");
+stepsSection.id = "steps-section";
 
 // VARIABLES CON LOS ENDPOINTS
-// Veganas
-const url =
-  "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random?tags=vegan&number=4";
+// Meet
+const meetUrl = 'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random?number=4';
+// Veggie
+const veggieUrl = 'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random?tags=vegetarian&number=4';
+// Vegan
+const veganUrl = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random?tags=vegan&number=4";
+// Datos nutricionales con ID
+const nutritionUrl = 'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/660109/nutritionWidget.json';
+// Opciones método get
 const options = {
   method: "GET",
   headers: {
@@ -1725,13 +1732,22 @@ const options = {
   },
 };
 
-
-
-// FUNCIONES
+// ---------FUNCIONES PINTAR-------
 // Conexión API
 async function getRecipes() {
   try {
-    const response = await fetch(url, options);
+    let response = [];
+    switch (recipesMain.id) {
+      case 'meet-main' :
+        response = await fetch(meetUrl, options);
+        break;
+      case 'veggie-main' :
+        response = await fetch(meetUrl, options);
+        break;
+      case 'vegan-main' :
+        response = await fetch(meetUrl, options);
+        break;
+    }
     const {recipes} = await response.json();
     return recipes;
     console.log(randomRecipes);
@@ -1742,13 +1758,25 @@ async function getRecipes() {
 // Pintar lista
 function printList(array) {
   // Acorto los nombres que sean demasiado largos
+  let heading = '';
+  switch (recipesMain.id) {
+    case 'meet-main' :
+      heading = 'Meet'
+      break;
+    case 'veggie-main' :
+      heading = 'Veggie'
+      break;
+    case 'vegan-main' :
+      heading = 'Vegan'
+      break;
+  }
   let titles = [];
   array.forEach(element => {
     titles.push(element.title.substr(0,20));
   });
-  sectionSpa.innerHTML = `
-  <section>   
-      <h1>Vegan</h1>
+  sectionSpa.id = "list-section"
+  sectionSpa.innerHTML = ` 
+      <h1>${heading}</h1>
       <article class="suggestion" id="suggestion-1">
           <div class="text">
               <h4>${titles[0]}</h4>
@@ -1796,20 +1824,17 @@ function printList(array) {
               <img src=${array[3].image} alt="">
           </a>
       </div>
-      </article>
-  </section>`;
-  veganMain.appendChild(sectionSpa);
-  console.log(sectionSpa);
-  console.log(veganMain);
+      </article>`;
+  recipesMain.appendChild(sectionSpa);
 }
 // Pintar detalle
-async function printDetail(array, i) {
+function printDetail(array, i) {
   // Acorto los nombres que sean demasiado largos
   let titles = [];
   array.forEach(element => {
     titles.push(element.title.substr(0,20));
   });
-  sectionSpa.id = 'detail';
+  sectionSpa.id = 'detail-section';
   sectionSpa.innerHTML = `
     <h2>${titles[i]}</h2>
     <article class="image">
@@ -1829,10 +1854,8 @@ async function printDetail(array, i) {
         <div>
             <canvas id="myChart"></canvas>
         </div>
-    </article>
-    `;
-  await veganMain.appendChild(sectionSpa);
-
+    </article>`;
+  recipesMain.appendChild(sectionSpa);
   // Pintamos ingredientes
   const igQuantity = document.getElementById("ig-quantity");
   const igName = document.getElementById("ig-name");
@@ -1844,8 +1867,6 @@ async function printDetail(array, i) {
       igQuantity.appendChild(liQuantity);
       igName.appendChild(liName);
     })
-
-
   // Gráfica con valor nutricional
   const ctx = document.getElementById('myChart');
   new Chart(ctx, {
@@ -1869,39 +1890,77 @@ async function printDetail(array, i) {
       }
     }
   });
+};
+// Pintar instrucciones
+function printSteps(array, i) {
+  const articleBtn = document.createElement("article");
+  array[i].analyzedInstructions[0].steps.forEach((step, j) => {
+    const stepArticle = document.createElement("article");
+    stepArticle.classList.add("step-article");
+    const stepH3 = document.createElement("h3");
+    const stepP = document.createElement("p");
+
+    stepH3.innerText = `${step.number}`;
+    stepP.innerText = `${step.step}`;
+    articleBtn.innerHTML = 
+    `<article id="article-btn">
+        <button id="back-button">Back to list</button>
+    </article>`;
+
+    stepArticle.appendChild(stepH3);
+    stepArticle.appendChild(stepP);
+    
+    stepsSection.appendChild(stepArticle);
+    recipesMain.appendChild(stepsSection);
+  })
+  stepsSection.appendChild(articleBtn);
+
+  // Volver atrás
+  const backButton = document.getElementById("back-button");
+  backButton.addEventListener('click', function() {
+    window.location.hash = '';
+  })
 }
 
-// NAVEGACIÓN
+// ----------NAVEGACIÓN-------------
 // Pantalla inicial - Lista 4 recetas
-// let randomRecipes = getRecipes();
-// randomRecipes.then((data) => {
-  if (veganMain) {
-    printList(data)
+let randomRecipes = getRecipes();
+randomRecipes.then((data) => {
+  if (recipesMain) {
+    printList(data);
   }
-// })
+})
 // Pantalla detalle receta 
 window.addEventListener("hashchange", function() {
   let hash = window.location.hash;
   sectionSpa.innerHTML = '';
-  // detailSection.innerHTML = '';
-  // randomRecipes.then((data) => {
+  randomRecipes.then((data) => {
     switch (hash) {
+      case '' :
+        randomRecipes.then((data) => {
+          if (recipesMain) {
+            stepsSection.innerHTML = '';
+            stepsSection.remove();
+            printList(data);
+          }
+        })
       case '#/first' :
-        console.log('uno')
         printDetail(data, 0);
+        printSteps(data, 0);
         break;
       case '#/second' :
         printDetail(data, 1);
-        console.log('dos');
+        printSteps(data, 1);
         break;
       case '#/third' :
         printDetail(data, 2);
-        console.log('tres');
+        printSteps(data, 2);
         break;
       case '#/fourth' :
         printDetail(data, 3);
-        console.log('cuatro');
+        printSteps(data, 3);
         break;
     }
   })
-// })
+})
+

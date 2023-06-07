@@ -1709,7 +1709,7 @@ const data = [
   ];
 
 // VARIABLES GLOBALES
-const recipeMain = document.getElementById("recipe");
+const veganMain = document.getElementById("vegan");
 const sectionSpa = document.createElement("section");
 
 
@@ -1741,12 +1741,17 @@ async function getRecipes() {
 }
 // Pintar lista
 function printList(array) {
+  // Acorto los nombres que sean demasiado largos
+  let titles = [];
+  array.forEach(element => {
+    titles.push(element.title.substr(0,20));
+  });
   sectionSpa.innerHTML = `
   <section>   
       <h1>Vegan</h1>
       <article class="suggestion" id="suggestion-1">
           <div class="text">
-              <p>${array[0].title}</p>
+              <h4>${titles[0]}</h4>
               <p>${array[0].readyInMinutes} min</p>
               <p>${array[0].servings} servings</p>
           </div>
@@ -1758,7 +1763,7 @@ function printList(array) {
       </article>
       <article class="suggestion" id="suggestion-2">
       <div class="text">
-          <p>${array[1].title}</p>
+          <h4>${titles[1]}</h4>
           <p>${array[1].readyInMinutes} min</p>
           <p>${array[1].servings} servings</p>
       </div>
@@ -1770,7 +1775,7 @@ function printList(array) {
       </article>
       <article class="suggestion" id="suggestion-3">
       <div class="text">
-          <p>${array[2].title}</p>
+      <h4>${titles[2]}</h4>
           <p>${array[2].readyInMinutes} min</p>
           <p>${array[2].servings} servings</p>
       </div>
@@ -1782,7 +1787,7 @@ function printList(array) {
       </article>
       <article class="suggestion" id="suggestion-4">
       <div class="text">
-          <p>${array[3].title}</p>
+      <h4>${titles[3]}</h4>
           <p>${array[3].readyInMinutes} min</p>
           <p>${array[3].servings} servings</p>
       </div>
@@ -1793,16 +1798,20 @@ function printList(array) {
       </div>
       </article>
   </section>`;
-  recipeMain.appendChild(sectionSpa);
+  veganMain.appendChild(sectionSpa);
   console.log(sectionSpa);
-  console.log(recipeMain);
+  console.log(veganMain);
 }
 // Pintar detalle
 async function printDetail(array, i) {
-  console.log('hola');
+  // Acorto los nombres que sean demasiado largos
+  let titles = [];
+  array.forEach(element => {
+    titles.push(element.title.substr(0,20));
+  });
   sectionSpa.id = 'detail';
   sectionSpa.innerHTML = `
-    <h2>${array[i].title}</h2>
+    <h2>${titles[i]}</h2>
     <article class="image">
         <img src="${array[i].image}" alt="">
     </article>
@@ -1810,27 +1819,9 @@ async function printDetail(array, i) {
         <div>
             <ul id="ig-quantity">
                 <li><p id="space"></p></li>
-                <li>1</li>
-                <li>1</li>
-                <li>0.5 cups</li>
-                <li>3 Tbsps</li>
-                <li>1</li>
-                <li>3 servings</li>
-                <li>3 servings</li>
-                <li>1.5 tbsp</li>
-                <li>4.0 cups</li>
             </ul>
             <ul id="ig-name">
                 <li><p>Ingredients</p></li>
-                <li>bay leaf</li>
-                <li>garlic</li>
-                <li>lentils</li>
-                <li>olive oil</li>
-                <li>onion</li>
-                <li>salt & pepper</li>
-                <li>tomato</li>
-                <li>vinegar</li>
-                <li>water</li>
             </ul>
         </div>
     </article>
@@ -1840,7 +1831,22 @@ async function printDetail(array, i) {
         </div>
     </article>
     `;
-  await recipeMain.appendChild(sectionSpa);
+  await veganMain.appendChild(sectionSpa);
+
+  // Pintamos ingredientes
+  const igQuantity = document.getElementById("ig-quantity");
+  const igName = document.getElementById("ig-name");
+    array[i].extendedIngredients.forEach(element => {
+      const liQuantity = document.createElement('li');
+      const liName = document.createElement('li');
+      liQuantity.innerText = `${element.amount} ${element.unit}`;
+      liName.innerText = `${element.name}`;
+      igQuantity.appendChild(liQuantity);
+      igName.appendChild(liName);
+    })
+
+
+  // Gráfica con valor nutricional
   const ctx = document.getElementById('myChart');
   new Chart(ctx, {
     type: 'bar',
@@ -1869,7 +1875,7 @@ async function printDetail(array, i) {
 // Pantalla inicial - Lista 4 recetas
 // let randomRecipes = getRecipes();
 // randomRecipes.then((data) => {
-  if (recipeMain) {
+  if (veganMain) {
     printList(data)
   }
 // })

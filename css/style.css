@@ -7,14 +7,16 @@ body {
     height: 100vh;
     font-family: 'Comfortaa';
     color: rgb(70, 70, 70);
-}
-article {
-    margin: 0;
-    padding: 0;
+    display: flex;
+    justify-content: center;
 }
 main {
     height: 100%;
     max-width: 600px;
+}
+article {
+    margin: 0;
+    padding: 0;
 }
 section {
     height: 100%;
@@ -32,21 +34,34 @@ h1 {
 h2 {
     margin: 0;
     padding: 0;
-    font-size: 48px;
+    font-size: 40px;
     text-align: center;
 }
 
 /* LISTA */
 .suggestion {
+    min-height: 120px;
     display: flex;
     justify-content: space-around;
+    box-shadow: 10px 0px 10px 0px #b5b5b5;
 }
 .suggestion .text {
+    min-width: 200px;
     text-align: right;
-    width: 40%;
+    margin-bottom: 0.5rem;
+}
+.text h4 {
+    margin: 0.6rem;
+}
+.text p {
+    margin: 0.5rem;
+    font-size: 14px;
 }
 .suggestion .image {
     width: 40%;
+    border-left: 1px solid #d3d3d3;
+}
+.image a {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -60,10 +75,7 @@ h2 {
 #detail {
     padding-top: 2.5rem;
     padding-bottom: 2.5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: space-around;
+    align-items: center;
 }
 #detail article {
     flex-grow: 1;
@@ -81,9 +93,6 @@ h2 {
 }
 .ingredients {
     width: 85%;
-    display: flex;
-    justify-content: right;
-    align-items: center;
 }
 .ingredients h4 {
     text-align: right;
@@ -97,12 +106,14 @@ ul {
     margin: 0;
     list-style: none;
 }
+li {
+    font-size: 14px;
+}
 #ig-quantity {
     text-align: right;
 }
-.ingredients p {
-    margin-top: 0;
-    padding-top: 0;
+#ig-name {
+    width: 40%;;
 }
 #space {
     height: 1.1rem;

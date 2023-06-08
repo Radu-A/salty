@@ -5,7 +5,6 @@ Página de sugerencia de recetas en función del tipo de dieta.
 ## Tabla de contenidos
 
 - [Objetivo](#objetivo)
-  - [Requisitos](#requisitos)
   - [Fases](#fases)
   - [Capturas](#capturas)
   - [Links](#links)
@@ -13,7 +12,6 @@ Página de sugerencia de recetas en función del tipo de dieta.
   - [Construido con](#construido-con)
   - [Puntos clave](#puntos-clave)
   - [Aspectos a mejorar](#aspectos-a-mejorar)
-  - [Recursos](#recursos)
 
 ## Objetivo
 
@@ -21,37 +19,25 @@ Página de sugerencia de recetas en función del tipo de dieta.
 - Se mostrarán cuatro recetas en función de la dieta elegida.
 - Al entrar en una receta se podrá ver: ingredientes, valor nutricional e instrucciones.
 
-### Requisitos
-
-- Manipulación dinámica del DOM
-- Crear una página SPA para las preguntas
-- Manejo de ES6
-- Asincronía. Usar API de preguntas https://opentdb.com/
-- APIs HTML5: Uso de Local storage y gráficas, etc...
-- Sin frameworks ni librerias externas en la medida de lo posible
-- Gestión del proyecto en Github desde el principio. Uso de ramas, fork, pull request, etc...
-- Código limpio, buenas prácticas
-
 ### Fases
 
 - FASE 1: Diseño del front: Diseño responsive, mobile first, semántica HTML5.
 - FASE 2: Lógica de JavaScript.
-- FASE 3: Asincronía: Leer 5 preguntas random de la API de prenguntas para generar el Quiz.
-- FASE 4 (avanzado) - APIs HTML5: Almacenar la puntuación de cada partida en Local Storage. Mostrar en la Home con una gráfica los resultados de las últimas partidas jugadas.
-- FASE 5 - Migración a Firebase
-- FASE 6 - Firebase Auth. Login con Google (obligatorio) y email+password
+- FASE 3: Asincronía: Mostrar datos proporcionados por la API Spoonacular.
+- FASE 4: Navegación 1. Mostrar cuatro recetas aleatorias y las pantallas de cada receta.
+- FASE 5: Navegación 2. Mostrar los tres tipos de dieta y las recetas aleatorias en función de la dieta.
+- FASE 6: Página de inicio y navegación completa.
 
 ### Capturas
 
-![](./assets/screenshots/smartphone-login.jpg)
-![](./assets/screenshots/smartphone-play.jpg)
-![](./assets/screenshots/desktop-login.jpg)
-![](./assets/screenshots/desktop-play.jpg)
+![](./assets/screenshots/smartphone.jpg)
+![](./assets/screenshots/desktop1.jpg)
+![](./assets/screenshots/desktop2.jpg)
 
 ### Links
 
-- Repositorio: [Quiz Team Up](https://github.com/Radu-A/quiz-team-up)
-- Live Site: [Demo](https://quiz-team-up.vercel.app/)
+- Repositorio: [satly](https://github.com/Radu-A/salty)
+- Live Site: [Demo](https://github.com/Radu-A/salty)
 
 ## Proceso
 
@@ -62,23 +48,15 @@ Página de sugerencia de recetas en función del tipo de dieta.
 - Flexbox
 - Mobile-first workflow
 - Diseño SPA
-- Local Storage
-- Firebase: Firestore y Firebase Auth
 
 ### Puntos clave
 
 - Diseño SPA. Aprender la lógica del evento "cambio de Hash" y emplearlo para navegar dentro de una misma página
-- Validación de respuestas adaptada al diseño SPA. Conseguír que la validación de las respuestas y el almacenamiento de las repuestas correctas funcione en una Single Page Aplication
-- Localstorage y Firebase. Combinar ambos métodos para almacenar las partidas guardadas
-- Firebase Auth. Asimilar el flujo de datos para crear una navegación adecuada en la página de inicio
+- Diferentes conexiones a la API según lo requerido
+- Maquetar una página construida completamente con texto y elemetos dinámicos
+- Navegar teniendo en cuenta las peticiones a la API y la generación de elementos dinamicos
 
 ### Aspectos a mejorar
 
-- Desarrollar la lógica de una página de inicio con autenticación
-- Mejorar la navegación durante la autenticación con modales
-- Practicar el uso de Firebase
-
-### Recursos
-
-- [Tutorial SPA JS Vanilla](https://www.youtube.com/watch?v=D9avX-jtIPM&t=3980s) - Tutorial sobre el uso de SPA con Vanilla Jvascript.
-- [Firebase Auth](https://www.youtube.com/watch?v=1rLBjRF0ep0&t=3974s) - Tutorial sobre Firebase Auth.
+- Planificar adecuadamente el contenido HTML que se se va a generar con Javascript para mejorar el diseño con CSS
+- Aumentar funcionalidades

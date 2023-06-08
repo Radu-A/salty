@@ -1713,6 +1713,7 @@ const recipesMain = document.querySelector(".recipes");
 const sectionSpa = document.createElement("section");
 const stepsSection = document.createElement("section");
 stepsSection.id = "steps-section";
+const startButton = document.getElementById('start-button');
 
 // VARIABLES CON LOS ENDPOINTS
 // Meet
@@ -1755,6 +1756,17 @@ async function getRecipes() {
     console.error(`ERROR: ${error.stack}`);
   }
 }
+async function getNutrition(id) {
+  try {
+    let response = [];
+    response = await fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${id}/nutritionWidget.json`, options);
+    const nutrition = await response.json();
+    return nutrition;
+  } catch (error) {
+    console.error(`ERROR: ${error.stack}`);
+  }
+}
+
 // Pintar lista
 function printList(array) {
   // Acorto los nombres que sean demasiado largos
@@ -1824,8 +1836,15 @@ function printList(array) {
               <img src=${array[3].image} alt="">
           </a>
       </div>
+      </article>
+      <article id="article-btn">
+        <button id="back-diet-button">Back</button>
       </article>`;
   recipesMain.appendChild(sectionSpa);
+  const backDietButton = document.getElementById("back-diet-button");
+  backDietButton.addEventListener('click', function() {
+    window.location = './diet.html';
+  })
 }
 // Pintar detalle
 function printDetail(array, i) {
@@ -1868,28 +1887,39 @@ function printDetail(array, i) {
       igName.appendChild(liName);
     })
   // Gráfica con valor nutricional
-  const ctx = document.getElementById('myChart');
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: ['Fat', 'Carb', 'Prot', 'Fib'],
-      datasets: [{
-        label: 'gr',
-        data: [12, 19, 3, 5],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      legend: {
-          display: true
+  const nutritionValues = getNutrition(array[i].id);
+  nutritionValues.then(data=>{
+    console.log(data);
+    const calories = data.nutrients[0].amount;
+    const fat = data.nutrients[1].amount;
+    const sat = data.nutrients[2].amount;
+    const carb = data.nutrients[3].amount;
+    const prot = data.nutrients[8].amount;
+    console.log(calories);
+    const ctx = document.getElementById('myChart');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Fat', 'S.Fat', 'Carb', 'Prot'],
+        datasets: [{
+          label: 'gr',
+          data: [fat, sat, carb, prot],
+          borderWidth: 1
+        }]
       },
-      scales: {
-        y: {
-          beginAtZero: true
+      options: {
+        legend: {
+            display: false
+        },
+        scales: {
+          y: {
+            beginAtZero: true
+          }
         }
       }
-    }
-  });
+    });
+  })
+  
 };
 // Pintar instrucciones
 function printSteps(array, i) {
@@ -1923,27 +1953,28 @@ function printSteps(array, i) {
 }
 
 // ----------NAVEGACIÓN-------------
+// 
 // Pantalla inicial - Lista 4 recetas
-let randomRecipes = getRecipes();
-randomRecipes.then((data) => {
+// let randomRecipes = getRecipes();
+// randomRecipes.then((data) => {
   if (recipesMain) {
     printList(data);
   }
-})
+// })
 // Pantalla detalle receta 
 window.addEventListener("hashchange", function() {
   let hash = window.location.hash;
   sectionSpa.innerHTML = '';
-  randomRecipes.then((data) => {
+  // randomRecipes.then((data) => {
     switch (hash) {
       case '' :
-        randomRecipes.then((data) => {
+        // randomRecipes.then((data) => {
           if (recipesMain) {
             stepsSection.innerHTML = '';
-            stepsSection.remove();
+            stepsSection.remove;
             printList(data);
           }
-        })
+        // })
       case '#/first' :
         printDetail(data, 0);
         printSteps(data, 0);
@@ -1962,5 +1993,5 @@ window.addEventListener("hashchange", function() {
         break;
     }
   })
-})
+// })
 

@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&family=Shadows+Into+Light&family=Slackside+One&display=swap');
 
 /* GLOBAL */
 body {
     margin: 0;
     padding: 0;
     font-family: 'Comfortaa';
-    color: rgb(70, 70, 70);
+    color: #464646;
     display: flex;
     justify-content: center;
 }
@@ -17,34 +17,97 @@ article {
     padding: 0;
 }
 section {
-    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: space-around;
 }
 h1 {
+    font-family: 'Shadows Into Light';
     margin: 0;
     padding: 0;
     font-size: 64px;
     text-align: center;
 }
 h2 {
+    font-family: 'Shadows Into Light';
     margin: 0;
     padding: 0;
-    font-size: 40px;
+    font-size: 56px;
     text-align: center;
 }
-
+a, a:active, a:visited {
+    text-decoration: none;
+    color: #464646;
+}
+/* INDEX */
+#index {
+    height: 100vh;
+}
+#index h1 {
+    font-family: 'Shadows Into Light';
+    font-weight: 500;
+    font-size: 8rem;
+    line-height: 6rem;
+    margin-top: 2rem;
+}
+#index h2 {
+    margin-top: 0;
+    font-family: 'Slackside One', cursive;
+    font-size: 2rem;
+    font-weight: 400;
+}
+#title-section {
+    padding-top: 9rem;
+    min-height: 60%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+#auth-section {
+    min-height: 40%;
+}
+/* DIETA */
+#diet-main {
+    height: 100vh;
+    max-width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: space-around;
+}
+.diet-section {
+    max-width: 450px;
+}
+.diet-article {
+    margin: 1.5rem;
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid gray
+}
+.diet-article h1 {
+    position: absolute;
+    font-size: 5rem;
+    color: white;
+}
+.diet-img {
+    width: 90%;
+}
 /* LISTA */
 #list-section {
     height: 100vh;
 }
 .suggestion {
-    min-height: 140px;
+    width: 100%;
+    min-height: 130px;
     display: flex;
     justify-content: space-around;
-    box-shadow: 1px 1px 20px 0px #b5b5b5;
+    /* box-shadow: 1px 1px 10px 0px #b5b5b5; */
+    border-bottom: 1px solid #b8b8b8;
 }
 .suggestion .text {
     min-width: 200px;

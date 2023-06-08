@@ -1853,9 +1853,6 @@ function printDetail(array, i) {
   array.forEach(element => {
     titles.push(element.title.substr(0,20));
   });
-  // const detailHeading = document.createElement("h2");
-  // detailHeading.innerText = `${titles[i]}`;
-  // recipesMain.appendChild(detailHeading);
 
   sectionSpa.id = 'detail-section';
   sectionSpa.innerHTML = `

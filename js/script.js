@@ -1853,23 +1853,27 @@ function printDetail(array, i) {
   array.forEach(element => {
     titles.push(element.title.substr(0,20));
   });
+  // const detailHeading = document.createElement("h2");
+  // detailHeading.innerText = `${titles[i]}`;
+  // recipesMain.appendChild(detailHeading);
+
   sectionSpa.id = 'detail-section';
   sectionSpa.innerHTML = `
     <h2>${titles[i]}</h2>
-    <article class="image">
+    <article class="detail-image">
         <img src="${array[i].image}" alt="">
     </article>
     <article class="ingredients">
+        <h3>Ingredients</h3>
         <div>
             <ul id="ig-quantity">
-                <li><p id="space"></p></li>
             </ul>
             <ul id="ig-name">
-                <li><p>Ingredients</p></li>
             </ul>
         </div>
     </article>
     <article id="graph-art">
+        <h3>Nutricional Value</h3>
         <div>
             <canvas id="myChart"></canvas>
         </div>
@@ -1923,7 +1927,11 @@ function printDetail(array, i) {
 };
 // Pintar instrucciones
 function printSteps(array, i) {
+  const directionsHeader = document.createElement('h2');
+  directionsHeader.innerHTML = 'Directions';
+  stepsSection.appendChild(directionsHeader);
   const articleBtn = document.createElement("article");
+  articleBtn.id = 'article-btn';
   array[i].analyzedInstructions[0].steps.forEach((step, j) => {
     const stepArticle = document.createElement("article");
     stepArticle.classList.add("step-article");
@@ -1933,9 +1941,7 @@ function printSteps(array, i) {
     stepH3.innerText = `${step.number}`;
     stepP.innerText = `${step.step}`;
     articleBtn.innerHTML = 
-    `<article id="article-btn">
-        <button id="back-button">Back to list</button>
-    </article>`;
+    `<button id="back-button">Back to list</button>`;
 
     stepArticle.appendChild(stepH3);
     stepArticle.appendChild(stepP);
@@ -1943,9 +1949,10 @@ function printSteps(array, i) {
     stepsSection.appendChild(stepArticle);
     recipesMain.appendChild(stepsSection);
   })
-  stepsSection.appendChild(articleBtn);
 
-  // Volver atrás
+  // Botón volver atrás
+  
+  stepsSection.appendChild(articleBtn);
   const backButton = document.getElementById("back-button");
   backButton.addEventListener('click', function() {
     window.location.hash = '';
@@ -1955,26 +1962,26 @@ function printSteps(array, i) {
 // ----------NAVEGACIÓN-------------
 // 
 // Pantalla inicial - Lista 4 recetas
-// let randomRecipes = getRecipes();
-// randomRecipes.then((data) => {
+let randomRecipes = getRecipes();
+randomRecipes.then((data) => {
   if (recipesMain) {
     printList(data);
   }
-// })
+})
 // Pantalla detalle receta 
 window.addEventListener("hashchange", function() {
   let hash = window.location.hash;
   sectionSpa.innerHTML = '';
-  // randomRecipes.then((data) => {
+  randomRecipes.then((data) => {
     switch (hash) {
       case '' :
-        // randomRecipes.then((data) => {
+        randomRecipes.then((data) => {
           if (recipesMain) {
             stepsSection.innerHTML = '';
-            stepsSection.remove;
+            stepsSection.remove();
             printList(data);
           }
-        // })
+        })
       case '#/first' :
         printDetail(data, 0);
         printSteps(data, 0);
@@ -1993,5 +2000,5 @@ window.addEventListener("hashchange", function() {
         break;
     }
   })
-// })
+})
 

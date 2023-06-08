@@ -24,6 +24,7 @@ section {
 }
 h1 {
     font-family: 'Shadows Into Light';
+    color: #343434;
     margin: 0;
     padding: 0;
     font-size: 64px;
@@ -31,9 +32,11 @@ h1 {
 }
 h2 {
     font-family: 'Shadows Into Light';
+    color: #343434;
     margin: 0;
     padding: 0;
     font-size: 56px;
+    width: 80%;
     text-align: center;
 }
 a, a:active, a:visited {
@@ -87,7 +90,8 @@ a, a:active, a:visited {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid gray
+    border: 1px solid gray;
+    border-radius: 3px;
 }
 .diet-article h1 {
     position: absolute;
@@ -96,18 +100,24 @@ a, a:active, a:visited {
 }
 .diet-img {
     width: 90%;
+    border-radius: 3px;
 }
 /* LISTA */
 #list-section {
     height: 100vh;
+    width: 100%;
+    max-width: 600px;
+}
+#list-section h1 {
+    margin: 1.5rem;
 }
 .suggestion {
     width: 100%;
-    min-height: 130px;
+    min-height: 100px;
     display: flex;
     justify-content: space-around;
-    /* box-shadow: 1px 1px 10px 0px #b5b5b5; */
-    border-bottom: 1px solid #b8b8b8;
+    box-shadow: 1px 1px 10px 0px #b5b5b5;
+    /* border-bottom: 1px solid #b8b8b8; */
 }
 .suggestion .text {
     min-width: 200px;
@@ -133,33 +143,31 @@ a, a:active, a:visited {
     align-items: center;
 }
 .image img {
-    width: 100%;
+    max-height: 100px;
+    width: 80%;
     border-radius: 3px;
 }
 
-/* DETALLE */
+/* DETAIL */
 #detail-section {
     padding-top: 2.5rem;
     align-items: center;
 }
 #detail-section article {
-    flex-grow: 1;
-    flex-shrink: 1;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
     max-width: 400px;
+    width: 80%;
+    border-bottom: 1px solid #b8b8b8;
 }
-#detail-section .image {
-    margin-top: 1rem;
+.detail-image {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-bottom: 1px solid #b8b8b8;
 }
-.image img {
+.detail-image img {
     width: 75%;
-}
-.ingredients {
-    width: 85%;
 }
 .ingredients h4 {
     text-align: right;
@@ -182,22 +190,23 @@ li {
 #space {
     height: 1.1rem;
 }
-#graph-art {
-    height: auto;
+#graph-art div {
+    /* width: 250px; */
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-#graph-art div {
-    width: 250px;
-}
 
 /* STEPS */
 #steps-section {
+    padding-top: 2.5rem;
     justify-content: flex-start;
     align-items: center;
-} 
+}
+#steps-section h2 {
+    padding-bottom: 2.5rem;
+}
 .step-article {
     display: flex;
     width: 90%;
@@ -210,6 +219,9 @@ li {
     width: 85%;
 }
 #article-btn {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -224,3 +236,21 @@ li {
     color: inherit;
     background-color: white;
 }
+
+@media screen and (min-width: 468px) {
+        /* DETAIL */
+        .recipes {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+
+            width: 90%;
+            max-width: 1000px;
+        }
+        #detail-section {
+            width: 50%;
+        }
+        #steps-section {
+            width: 50%;
+        }
+  }

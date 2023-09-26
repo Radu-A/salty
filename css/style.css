@@ -84,7 +84,7 @@ a, a:active, a:visited {
 }
 .diet-article {
     margin: 1.5rem;
-    height: 100%;
+    height: 280px;
     box-sizing: border-box;
     display: flex;
     justify-content: center;

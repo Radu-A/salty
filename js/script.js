@@ -8,7 +8,7 @@ const startButton = document.getElementById('start-button');
 
 // VARIABLES CON LOS ENDPOINTS
 // Meet
-const meetUrl = 'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random?number=4';
+const meetUrl = 'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random?tags=meat&number=4';
 // Veggie
 const veggieUrl = 'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random?tags=vegetarian&number=4';
 // Vegan
@@ -64,7 +64,7 @@ function printList(array) {
   let heading = '';
   switch (recipesMain.id) {
     case 'meet-main' :
-      heading = 'Meet'
+      heading = 'Meat'
       break;
     case 'veggie-main' :
       heading = 'Veggie'
